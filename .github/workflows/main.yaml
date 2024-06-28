@@ -15,7 +15,7 @@ jobs:
             mkdir -p $MY_INSTALL_DIR
             export PATH="$MY_INSTALL_DIR/bin:$PATH"
             apt update
-            apt install -y sudo cmake git build-essential autoconf libtool pkg-config libjsoncpp-dev libpqxx-dev libc6 unzip
+            apt install -y sudo cmake git build-essential autoconf libtool pkg-config libjsoncpp-dev libpqxx-dev libc6 unzip ninja-build
             git clone https://github.com/Microsoft/vcpkg.git
             cd vcpkg
             ./bootstrap-vcpkg.sh -disableMetrics
