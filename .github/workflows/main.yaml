@@ -15,19 +15,16 @@ jobs:
             mkdir -p $MY_INSTALL_DIR
             export PATH="$MY_INSTALL_DIR/bin:$PATH"
             apt update
-            apt install -y sudo cmake git build-essential autoconf libtool pkg-config libjsoncpp-dev libpqxx-dev libc6
-            git clone --recurse-submodules -b v1.64.2 --depth 1 --shallow-submodules https://github.com/grpc/grpc
-            cd grpc
-            mkdir -p cmake/build
-            cd cmake/build
-            cmake -DgRPC_INSTALL=ON \
-              -DgRPC_BUILD_TESTS=OFF \
-              -DCMAKE_INSTALL_PREFIX=$MY_INSTALL_DIR \
-              ../..
-            make -j 2
-            make install
-            cd ../../../
+            apt install -y sudo cmake git build-essential autoconf libtool pkg-config libjsoncpp-dev libpqxx-dev libc6 unzip
+            git clone https://github.com/Microsoft/vcpkg.git
+            cd vcpkg
+            ./bootstrap-vcpkg.sh -disableMetrics
+            sudo ./vcpkg integrate install
+            ./vcpkg install grpc && ./vcpkg install protobuf
+            cd ..
             cd client/
+            # https://superuser.com/a/246841
+            echo 'set (VCPKG_HOME "$ENV{HOME}/vcpkg")' | cat - CMakeLists.txt > tmp && mv tmp CMakeLists.txt
             chmod +x genCppProto.sh
             ./genCppProto.sh
             mkdir -p cmake/build
