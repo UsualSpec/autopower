@@ -18,6 +18,7 @@ jobs:
             apt install -y sudo cmake git build-essential autoconf libtool pkg-config libjsoncpp-dev libpqxx-dev libc6 unzip ninja-build
             git clone https://github.com/Microsoft/vcpkg.git
             cd vcpkg
+            export VCPKG_FORCE_SYSTEM_BINARIES=1
             ./bootstrap-vcpkg.sh -disableMetrics
             sudo ./vcpkg integrate install
             ./vcpkg install grpc && ./vcpkg install protobuf
