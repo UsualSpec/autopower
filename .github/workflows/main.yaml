@@ -15,9 +15,9 @@ jobs:
             mkdir -p $MY_INSTALL_DIR
             export PATH="$MY_INSTALL_DIR/bin:$PATH"
             apt update
-            apt install -y sudo bazel-bootstrap cmake git build-essential autoconf libtool pkg-config libjsoncpp-dev libpqxx-dev libc6
-            git clone --recurse-submodules -b v1.64.2 --depth 1 --shallow-submodules https://github.com/grpc/grpc
-            cd grpc
+            apt install -y sudo libgrpc-dev protobuf-compiler-grpc bazel-bootstrap cmake git build-essential autoconf libtool pkg-config libjsoncpp-dev libpqxx-dev libc6
+            #git clone --recurse-submodules -b v1.64.2 --depth 1 --shallow-submodules https://github.com/grpc/grpc
+            #cd grpc
             #mkdir -p cmake/build
             #cd cmake/build
             #cmake -DgRPC_INSTALL=ON \
@@ -26,10 +26,10 @@ jobs:
             #  ../..
             #make -j 2
             #make install
-            bazel build :all
-            ls
-            pwd
-            cd ../../../
+            #bazel build :all
+            #ls
+            #pwd
+            #cd ../../../
             cd server/
             pwd
             ls
