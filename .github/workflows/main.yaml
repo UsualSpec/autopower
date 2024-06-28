@@ -1,0 +1,34 @@
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: pguyot/arm-runner-action@v2
+      with:
+        cpu: cortex-a7
+        commands: |
+            export MY_INSTALL_DIR=$HOME/.local
+            mkdir -p $MY_INSTALL_DIR
+            export PATH="$MY_INSTALL_DIR/bin:$PATH"
+            sudo apt install -y cmake build-essential autoconf libtool pkg-config libjsoncpp-dev libpqxx-dev
+            git clone --recurse-submodules -b v1.64.2 --depth 1 --shallow-submodules https://github.com/grpc/grpc
+            cd grpc
+            mkdir -p cmake/build
+            pushd cmake/build
+            cmake -DgRPC_INSTALL=ON \
+              -DgRPC_BUILD_TESTS=OFF \
+              -DCMAKE_INSTALL_PREFIX=$MY_INSTALL_DIR \
+              ../..
+            make -j 3
+            make install
+            popd
+            mkdir -p cmake/build
+            cd cmake/build
+            cmake ../..
+            make -j 3
+            cd ../..
+    - name: Upload asset
+      uses: actions/upload-artifact@v3
+      with:
+        name: Release
+        path: cmake/build/client
