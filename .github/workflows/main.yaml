@@ -8,7 +8,6 @@ jobs:
     - uses: pguyot/arm-runner-action@v2
       with:
         image_additional_mb: 8192
-        cpu: cortex-a76
         base_image: raspios_lite_arm64:latest
         bind_mount_repository: true
         commands: |
