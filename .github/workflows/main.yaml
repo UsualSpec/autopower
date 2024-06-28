@@ -14,7 +14,7 @@ jobs:
             mkdir -p $MY_INSTALL_DIR
             export PATH="$MY_INSTALL_DIR/bin:$PATH"
             sudo apt update
-            sudo apt install -y git build-essential autoconf libtool pkg-config libjsoncpp-dev libpqxx-dev libc6
+            sudo apt install -y cmake git build-essential autoconf libtool pkg-config libjsoncpp-dev libpqxx-dev libc6
             wget -q -O cmake-linux.sh https://github.com/Kitware/CMake/releases/download/v3.29.6/cmake-3.29.6-linux-aarch64.sh
             sh cmake-linux.sh -- --skip-license --prefix=$MY_INSTALL_DIR
             rm cmake-linux.sh
