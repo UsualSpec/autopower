@@ -30,12 +30,12 @@ jobs:
             #ls
             #pwd
             #cd ../../../
-            cd server/
+            cd client/
             pwd
             ls
             mkdir -p cmake/build
             cd cmake/build
-            cmake ../../
+            cmake ../..
             make -j 2
     - name: Upload binary release file
       uses: actions/upload-artifact@v3
