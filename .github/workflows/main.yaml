@@ -35,9 +35,8 @@ jobs:
             ls
             mkdir -p cmake/build
             cd cmake/build
-            cmake ../..
+            cmake ../../
             make -j 2
-            cd ../..
     - name: Upload binary release file
       uses: actions/upload-artifact@v3
       with:
