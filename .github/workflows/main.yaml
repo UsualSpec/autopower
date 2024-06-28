@@ -30,6 +30,7 @@ jobs:
             ls
             pwd
             cd ../../../
+            cd server/
             pwd
             ls
             mkdir -p cmake/build
