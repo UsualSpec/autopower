@@ -19,7 +19,7 @@ jobs:
             sh cmake-linux.sh -- --skip-license --prefix=$MY_INSTALL_DIR
             rm cmake-linux.sh
             ls $MY_INSTALL_DIR
-            export PATH="$MY_INSTALL_DIR/cmake:$PATH"
+            export PATH="$MY_INSTALL_DIR/share:$PATH"
             git clone --recurse-submodules -b v1.64.2 --depth 1 --shallow-submodules https://github.com/grpc/grpc
             cd grpc
             mkdir -p cmake/build
