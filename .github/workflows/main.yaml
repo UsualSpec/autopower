@@ -6,9 +6,9 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Setup system
-      run: sudo apt update && sudo apt install -y libssl-dev sudo cmake git build-essential autoconf libtool pkg-config libjsoncpp-dev libpqxx-dev libc6
+      run:  sudo apt update && sudo apt install -y libssl-dev sudo cmake git build-essential autoconf libtool pkg-config libjsoncpp-dev libpqxx-dev libc6
     - name: Setup arm cross compillation dependencies
-      run: sudo apt install -y libssl-dev:arm64 libjsoncpp-dev:arm64 libpqxx-dev:arm64 libc6:arm64
+      run: sudo dpkg --add-architecture arm64 && sudo apt install -y libssl-dev:arm64 libjsoncpp-dev:arm64 libpqxx-dev:arm64 libc6:arm64
     - name: Clone grpc
       run: git clone --recurse-submodules -b v1.64.2 --depth 1 --shallow-submodules https://github.com/grpc/grpc
     - name: Build grpc natively
